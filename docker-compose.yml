@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  build:
+    container_name: build-lineage-os
+    image: lineageos4microg/docker-lineage-cicd
+    environment:
+      - "BRANCH_NAME=lineage-17.1"
+      - "DEVICE_LIST=anne"
+      - "SIGN_BUILDS=true"
+      - "SIGNATURE_SPOOFING=restricted"
+      - "WITH_GMS=true"
+      - "INCLUDE_PROPRIETARY=false"
+      - "OTA_URL=https://ota1.aos.litetex.net/api"
+    volumes:
+      - "lineage:/srv/src"
+      - "./user/zips:/srv/zips"
+      - "./user/logs:/srv/logs"
+      - "cache:/srv/ccache"
+      - "./user/keys:/srv/keys"
+      - "./user/manifests:/srv/local_manifests"
+# Create as non Windows mounted volumes otherwise Docker/WSL dies after ~1.4GB
+volumes:
+  cache:
+  lineage:
+
