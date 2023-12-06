@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project name="aos-litetex/android_device_huawei_anne" path="device/huawei/anne" remote="github" />
+  <project name="aos-litetex/android_device_huawei_hi6250-common" path="device/huawei/hi6250-common" remote="github" />
+  <project name="aos-litetex/android_kernel_huawei_hi6250" path="kernel/huawei/hi6250" remote="github" />
+  <project name="aos-litetex/proprietary_vendor_huawei" path="vendor/huawei" remote="github" />
+</manifest>
