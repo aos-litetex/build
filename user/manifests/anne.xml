@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="aos-litetex/android_device_huawei_anne" path="device/huawei/anne" remote="github" />
-  <project name="aos-litetex/android_device_huawei_hi6250-common" path="device/huawei/hi6250-common" remote="github" />
-  <project name="aos-litetex/android_kernel_huawei_hi6250" path="kernel/huawei/hi6250" remote="github" />
-  <project name="aos-litetex/proprietary_vendor_huawei" path="vendor/huawei" remote="github" />
+  <!-- Ported from https://github.com/Iceows/lineage_build_leaos/blob/lineage-20.0/local_manifests_leaos/manifest.xml -->
+  <!-- AndyGC Yan QcRilAm --> 
+  <project path="packages/apps/QcRilAm" name="aos-litetex/android_packages_apps_QcRilAm" remote="github" revision="master" />
+
+  <!-- vendor -->
+  <project path="vendor/huawei/anne" name="aos-litetex/android_vendor_huawei_anne" remote="github" />
+  <project path="vendor/huawei/hi6250-9-common" name="aos-litetex/android_vendor_huawei_hi6250-9-common" remote="github" />
+
+  <!-- device -->
+  <project path="device/huawei/anne" name="aos-litetex/android_device_huawei_anne" remote="github" />
+  <project path="device/huawei/hi6250-9-common" name="aos-litetex/android_device_huawei_hi6250-9-common" remote="github" />
+
+  <!-- kernel -->
+  <project path="kernel/huawei/hi6250-9" name="aos-litetex/android_kernel_huawei_hi6250-9" remote="github" />
+
+  <!-- sepolicy -->
+  <project path="device/hisi/sepolicy" name="aos-litetex/android_device_hisi_sepolicy" remote="github" />
+
+  <!-- hardware -->
+  <project path="hardware/hisi" name="aos-litetex/android_hardware_hisi" remote="github" />
+  <project path="hardware/huawei" name="aos-litetex/android_hardware_huawei" remote="github" />
+
+  <!-- clang -->
+  <project path="prebuilts/clang/host/linux-x86/clang-r416183b1" name="aos-litetex/android_prebuilts_clang_host_linux-x86_clang-r416183b1" remote="github" revision="main" />
+
+  <!-- Patches -->
+  <project path="lineage_patches_leaos" name="aos-litetex/lineage_patches_leaos" remote="github" />
 </manifest>

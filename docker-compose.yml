@@ -6,8 +6,7 @@ services:
     build:
       context: build/docker-lineage-cicd
     environment:
-      - "ANDROID_MANIFEST_GIT_REPO_URL=https://github.com/aos-litetex/android.git"
-      - "BRANCH_NAME=lineage-17.1"
+      - "BRANCH_NAME=lineage-20.0"
       - "DEVICE_LIST=anne"
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
@@ -21,6 +20,7 @@ services:
       - "cache:/srv/ccache"
       - "./user/keys:/srv/keys"
       - "./user/manifests:/srv/local_manifests"
+      - "./user/userscripts:/srv/userscripts"
 # Create as non Windows mounted volumes otherwise Docker/WSL dies after ~1.4GB
 volumes:
   cache:
