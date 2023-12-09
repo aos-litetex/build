@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <!-- Ported from https://github.com/Iceows/lineage_build_leaos/blob/lineage-20.0/local_manifests_leaos/manifest.xml -->
+  <!-- Treble -->
+  <project path="vendor/hardware_overlay" name="trebledroid/vendor_hardware_overlay" remote="github" revision="pie" />
+  <project path="device/phh/treble" name="trebledroid/device_phh_treble" remote="github" revision="android-13.0" />
+  <project path="vendor/interfaces" name="trebledroid/vendor_interfaces" remote="github" revision="android-13.0" />
+  <project path="vendor/magisk" name="phhusson/vendor_magisk" remote="github" revision="android-10.0" />
+  <project path="vendor/lptools" name="phhusson/vendor_lptools" remote="github" revision="master"/>
+  <project path="vendor/vndk-tests" name="phhusson/vendor_vndk-tests" remote="github" revision="master"/>
+
   <!-- AndyGC Yan QcRilAm --> 
   <project path="packages/apps/QcRilAm" name="aos-litetex/android_packages_apps_QcRilAm" remote="github" revision="master" />
 
