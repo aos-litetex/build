@@ -21,7 +21,7 @@ services:
       - "./user/keys:/srv/keys"
       - "./user/manifests:/srv/local_manifests"
       - "./user/userscripts:/srv/userscripts"
-# Create as non Windows mounted volumes otherwise Docker/WSL dies after ~1.4GB
+# Create as non Windows mounted volumes otherwise Docker/WSL dies because Windows can't handle some files e.g. aux
 volumes:
   cache:
   lineage:
