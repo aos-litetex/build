@@ -299,6 +299,12 @@ for branch in ${BRANCH_NAME//,/ }; do
     set +eu
     # shellcheck source=/dev/null
     source build/envsetup.sh > /dev/null
+
+    if [ -f /root/userscripts/post-envsetup-inline.sh ]; then
+      echo ">> [$(date)] Running post-envsetup-inline.sh"
+      source /root/userscripts/post-envsetup-inline.sh || echo ">> [$(date)] Warning: post-envsetup-inline.sh failed!"
+    fi
+
     set -eu
 
     if [ -f /root/userscripts/before.sh ]; then
