@@ -2,7 +2,7 @@
 
 apply_patches() {
     echo "Applying patch group ${1}"
-    bash ./apply_patches.sh ./lineage_patches_leaos/${1}
+    bash /root/userscripts/apply_patches.sh ./lineage_patches_leaos/${1}
 }
 
 echo "Executing repopick"
