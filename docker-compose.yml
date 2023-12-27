@@ -11,7 +11,6 @@ services:
       # 2. We don't care about other devices or other meta projects
       - "ADDITIONAL_REPO_INIT_ARGS=--depth=1 -g default,-pixel-extra,-legacy-qcom,-infra"
       - "DEVICE_LIST=arm64_bvN"
-      - "OUT_DIR_PROD"
       # TODO
       # - "PARALLEL_JOBS=5"
       # - "NO_SYNC=true"
