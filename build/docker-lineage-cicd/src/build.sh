@@ -334,31 +334,36 @@ for branch in ${BRANCH_NAME//,/ }; do
         # Start the build
         echo ">> [$(date)] Starting build for $codename, $branch branch" | tee -a "$DEBUG_LOG"
         build_successful=false
-        if (set +eu ; mka "${jobs_arg[@]}" bacon) &>> "$DEBUG_LOG"; then
+        if (set +eu ; mka "${jobs_arg[@]}" systemimage) &>> "$DEBUG_LOG"; then
+          # https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F after this
+          outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
+          echo ">> [$(date)] Moving build artifacts for $codename to '$outdir'" | tee -a "$DEBUG_LOG"
+          cp -v out/target/product/tdgsi_arm64_ab/system.img "$outdir" | tee -a "$DEBUG_LOG"
+          cp -vr out/target/product/tdgsi_arm64_ab/system/. "$outdir"/system | tee -a "$DEBUG_LOG"
 
           # Move produced ZIP files to the main OUT directory
-          echo ">> [$(date)] Moving build artifacts for $codename to '$ZIP_DIR/$zipsubdir'" | tee -a "$DEBUG_LOG"
-          cd out/target/product/"$codename"
-          files_to_hash=()
-          for build in lineage-*.zip; do
-            cp -v system/build.prop "$ZIP_DIR/$zipsubdir/$build.prop" &>> "$DEBUG_LOG"
-            mv "$build" "$ZIP_DIR/$zipsubdir/" &>> "$DEBUG_LOG"
-            files_to_hash+=( "$build" )
-          done
-          cd "$source_dir/out/target/product/$codename/obj/PACKAGING/target_files_intermediates/lineage_$codename-target_files-eng.root/IMAGES/"
+          # echo ">> [$(date)] Moving build artifacts for $codename to '$ZIP_DIR/$zipsubdir'" | tee -a "$DEBUG_LOG"
+          # cd out/target/product/"$codename"
+          # files_to_hash=()
+          # for build in lineage-*.zip; do
+          #   cp -v system/build.prop "$ZIP_DIR/$zipsubdir/$build.prop" &>> "$DEBUG_LOG"
+          #   mv "$build" "$ZIP_DIR/$zipsubdir/" &>> "$DEBUG_LOG"
+          #   files_to_hash+=( "$build" )
+          # done
+          # cd "$source_dir/out/target/product/$codename/obj/PACKAGING/target_files_intermediates/lineage_$codename-target_files-eng.root/IMAGES/"
 
-          for image in recovery boot vendor_boot dtbo super_empty vbmeta vendor_kernel_boot; do
-            if [ -f "$image.img" ]; then
-              recovery_name="lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename-$image.img"
-              echo ">> [$(date)] Copying $image.img" to "$ZIP_DIR/$zipsubdir/$recovery_name" >> "$DEBUG_LOG"
-              cp "$image.img" "$ZIP_DIR/$zipsubdir/$recovery_name" &>> "$DEBUG_LOG"
-              files_to_hash+=( "$recovery_name" )
-            fi
-          done
-          cd "$ZIP_DIR/$zipsubdir"
-          for f in "${files_to_hash[@]}"; do
-            sha256sum "$f" > "$ZIP_DIR/$zipsubdir/$f.sha256sum"
-          done
+          # for image in recovery boot vendor_boot dtbo super_empty vbmeta vendor_kernel_boot; do
+          #   if [ -f "$image.img" ]; then
+          #     recovery_name="lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename-$image.img"
+          #     echo ">> [$(date)] Copying $image.img" to "$ZIP_DIR/$zipsubdir/$recovery_name" >> "$DEBUG_LOG"
+          #     cp "$image.img" "$ZIP_DIR/$zipsubdir/$recovery_name" &>> "$DEBUG_LOG"
+          #     files_to_hash+=( "$recovery_name" )
+          #   fi
+          # done
+          # cd "$ZIP_DIR/$zipsubdir"
+          # for f in "${files_to_hash[@]}"; do
+          #   sha256sum "$f" > "$ZIP_DIR/$zipsubdir/$f.sha256sum"
+          # done
           cd "$source_dir"
           build_successful=true
         else

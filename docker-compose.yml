@@ -10,12 +10,16 @@ services:
       # 1. shallow clone
       # 2. We don't care about other devices or other meta projects
       - "ADDITIONAL_REPO_INIT_ARGS=--depth=1 -g default,-pixel-extra,-legacy-qcom,-infra"
-      - "DEVICE_LIST=anne"
+      - "DEVICE_LIST=arm64_bvN"
+      - "OUT_DIR_PROD"
+      # TODO
+      # - "PARALLEL_JOBS=5"
+      # - "NO_SYNC=true"
+      - "CLEAN_AFTER_BUILD=false" # TODO
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
       - "INCLUDE_PROPRIETARY=false"
-      - "OTA_URL=https://ota1.aos.litetex.net/api"
     volumes:
       - "lineage:/srv/src"
       - "./user/zips:/srv/zips"

@@ -5,10 +5,19 @@ apply_patches() {
     bash /root/userscripts/apply_patches.sh ./lineage_patches_leaos/${1}
 }
 
-echo "Unzipping isp_dts"
-# EMUI 9
-unzip -o ./vendor/huawei/hi6250-9-common/proprietary/vendor/firmware/isp_dts.zip -d ./vendor/huawei/hi6250-9-common/proprietary/vendor/firmware
+echo "Applying treble patches"
+apply_patches patches_treble_prerequisite
+apply_patches patches_treble_td
 
-echo "Applying device patches"
-apply_patches patches_device
-apply_patches patches_device_iceows
+apply_patches patches_platform
+apply_patches patches_treble
+apply_patches patches_platform_personal
+apply_patches patches_treble_personal
+apply_patches patches_treble_iceows
+
+echo "Finalizing preparations for treble"
+rm -f device/*/sepolicy/common/private/genfs_contexts
+cd device/phh/treble
+git clean -fdx
+bash generate.sh lineage
+cd ../../..
