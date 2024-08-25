@@ -1,0 +1,20 @@
+name: Build OS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: [self-hosted, type-cax41, in-fsn1, image-arm-app-docker-ce]
+    steps:
+    - uses: actions/checkout@v4
+
+    # TODO: Import signing keys to ./user/keys
+    
+    - name: Build the OS
+      run: docker compose up
+
+    # TODO: Archive logs ./user/logs
+    # TODO: Archive artifacts ./user/zips
+
+    # TODO: Apply customization from huawei-creator
