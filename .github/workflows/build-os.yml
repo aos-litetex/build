@@ -9,12 +9,28 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # TODO: Import signing keys to ./user/keys
+    - name: Checkout signing keys # For now a repo as there a dozens of files that are kind of hard to store as a GitHub secret
+      uses: actions/checkout@v4
+      with:
+        repository: aos-litetex/build-signing-keys
+        token: ${{ secrets.SIGNING_KEY_CHECKOUT_GH_TOKEN }}
+        path: user/keys
     
-    - name: Build the OS
+    - name: Build OS using Docker
       run: docker compose up
 
-    # TODO: Archive logs ./user/logs
-    # TODO: Archive artifacts ./user/zips
+    - name: Archive logs
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs
+        path: user/logs
+
+    - run: ls -lha user/zips
+
+    - name: Archive built artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: zips
+        path: user/zips
 
     # TODO: Apply customization from huawei-creator
