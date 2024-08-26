@@ -145,7 +145,7 @@ RUN mkdir -p $MIRROR_DIR $SRC_DIR $TMP_DIR $CCACHE_DIR $ZIP_DIR $LMANIFEST_DIR \
 # Install build dependencies
 ############################
 RUN apt-get -qq update && \
-      if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+      if [ $(dpkg --print-architecture) = "arm64" ]; then \
       apt-get install -y g++-multilib-mips64-linux-gnuabi64 gcc-multilib-mips64-linux-gnuabi64; \
       else \
       apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
