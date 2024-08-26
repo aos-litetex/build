@@ -148,7 +148,7 @@ RUN apt-get -qq update && \
       if [ $(dpkg --print-architecture) = "arm64" ]; then \
       echo "On ARM64"; \
       else \
-      echo "On AMD64" && apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
+      apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
       fi \
       && apt-get install -y bc bison bsdmainutils build-essential ccache cgpt clang \
       cron curl flex git git-lfs gnupg gperf imagemagick \
