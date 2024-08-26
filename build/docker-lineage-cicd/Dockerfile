@@ -146,9 +146,9 @@ RUN mkdir -p $MIRROR_DIR $SRC_DIR $TMP_DIR $CCACHE_DIR $ZIP_DIR $LMANIFEST_DIR \
 ############################
 RUN apt-get -qq update && \
       if [ $(dpkg --print-architecture) = "arm64" ]; then \
-      apt-get install -y g++-multilib-mips64-linux-gnuabi64 gcc-multilib-mips64-linux-gnuabi64; \
+      echo "On ARM64"; \
       else \
-      apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
+      echo "On AMD64" && apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
       fi \
       && apt-get install -y bc bison bsdmainutils build-essential ccache cgpt clang \
       cron curl flex g++-multilib-mips64-linux-gnuabi64 gcc-multilib-mips64-linux-gnuabi64 git git-lfs gnupg gperf imagemagick \
