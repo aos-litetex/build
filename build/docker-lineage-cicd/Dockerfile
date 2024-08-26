@@ -166,6 +166,7 @@ RUN curl https://storage.googleapis.com/git-repo-downloads/repo > /usr/local/bin
 #####################
 COPY src/ /root/
 RUN find /root/ -type f -iname "*.sh" -exec chmod +x {} \;
+RUN chown -R root:root /root
 
 # Set the work directory
 ########################
