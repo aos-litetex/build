@@ -145,14 +145,9 @@ RUN mkdir -p $MIRROR_DIR $SRC_DIR $TMP_DIR $CCACHE_DIR $ZIP_DIR $LMANIFEST_DIR \
 # Install build dependencies
 ############################
 RUN apt-get -qq update && \
-      if [ $(dpkg --print-architecture) = "arm64" ]; then \
-      echo "On ARM64"; \
-      else \
-      apt-get install -y g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-dev lib32z1-dev; \
-      fi \
-      && apt-get install -y bc bison bsdmainutils build-essential ccache cgpt clang \
-      cron curl flex git git-lfs gnupg gperf imagemagick \
-      kmod liblz4-tool \
+      apt-get install -y bc bison bsdmainutils build-essential ccache cgpt clang \
+      cron curl flex g++-multilib gcc-multilib git git-lfs gnupg gperf imagemagick \
+      kmod lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool \
       libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 \
       libxml2-utils lsof lzop maven openjdk-8-jdk pngcrush procps python3 \
       python-is-python3 rsync schedtool squashfs-tools wget xdelta3 xsltproc yasm zip \
