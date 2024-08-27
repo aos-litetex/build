@@ -24,6 +24,7 @@ mkdir -p /root/userscripts
 cp -r "$USERSCRIPTS_DIR"/. /root/userscripts
 find /root/userscripts ! -type d ! -user root -exec echo ">> [$(date)] {} is not owned by root, removing" \; -exec rm {} \;
 find /root/userscripts ! -type d -perm /g=w,o=w -exec echo ">> [$(date)] {} is writable by non-root users, removing" \; -exec rm {} \;
+find /root/userscripts -type f -iname "*.sh" -exec chmod +x {} \;
 
 # Initialize CCache if it will be used
 if [ "$USE_CCACHE" = 1 ]; then
