@@ -313,28 +313,28 @@ for branch in ${BRANCH_NAME//,/ }; do
         DEBUG_LOG="$LOGS_DIR/$logsubdir/lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename.log"
 
         set +eu
-        breakfast "$codename" "$BUILD_TYPE" &>> "$DEBUG_LOG"
+        breakfast "$codename" "$BUILD_TYPE" |& tee -a "$DEBUG_LOG"
         breakfast_returncode=$?
         set -eu
         if [ $breakfast_returncode -ne 0 ]; then
             echo ">> [$(date)] breakfast failed for $codename, $branch branch" | tee -a "$DEBUG_LOG"
             # call post-build.sh so the failure is logged in a way that is more visible
             if [ -f /root/userscripts/post-build.sh ]; then
-              echo ">> [$(date)] Running post-build.sh for $codename" >> "$DEBUG_LOG"
-              /root/userscripts/post-build.sh "$codename" false "$branch" &>> "$DEBUG_LOG" || echo ">> [$(date)] Warning: post-build.sh failed!"
+              echo ">> [$(date)] Running post-build.sh for $codename" |& tee -a "$DEBUG_LOG"
+              /root/userscripts/post-build.sh "$codename" false "$branch" |& tee -a "$DEBUG_LOG" || echo ">> [$(date)] Warning: post-build.sh failed!"
             fi
             continue
         fi
 
         if [ -f /root/userscripts/pre-build.sh ]; then
-          echo ">> [$(date)] Running pre-build.sh for $codename" >> "$DEBUG_LOG"
-          /root/userscripts/pre-build.sh "$codename" &>> "$DEBUG_LOG" || echo ">> [$(date)] Warning: pre-build.sh failed!"
+          echo ">> [$(date)] Running pre-build.sh for $codename" |& tee -a "$DEBUG_LOG"
+          /root/userscripts/pre-build.sh "$codename" |& tee -a "$DEBUG_LOG" || echo ">> [$(date)] Warning: pre-build.sh failed!"
         fi
 
         # Start the build
         echo ">> [$(date)] Starting build for $codename, $branch branch" | tee -a "$DEBUG_LOG"
         build_successful=false
-        if (set +eu ; mka "${jobs_arg[@]}" systemimage) &>> "$DEBUG_LOG"; then
+        if (set +eu ; mka "${jobs_arg[@]}" systemimage) |& tee -a "$DEBUG_LOG"; then
           # https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F after this
           outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
           echo ">> [$(date)] Moving build artifacts for $codename to '$outdir'" | tee -a "$DEBUG_LOG"
@@ -386,8 +386,8 @@ for branch in ${BRANCH_NAME//,/ }; do
           fi
         fi
         if [ -f /root/userscripts/post-build.sh ]; then
-          echo ">> [$(date)] Running post-build.sh for $codename" >> "$DEBUG_LOG"
-          /root/userscripts/post-build.sh "$codename" $build_successful "$branch" &>> "$DEBUG_LOG" || echo ">> [$(date)] Warning: post-build.sh failed!"
+          echo ">> [$(date)] Running post-build.sh for $codename" |& tee -a "$DEBUG_LOG"
+          /root/userscripts/post-build.sh "$codename" $build_successful "$branch" |& tee -a "$DEBUG_LOG" || echo ">> [$(date)] Warning: post-build.sh failed!"
         fi
         echo ">> [$(date)] Finishing build for $codename" | tee -a "$DEBUG_LOG"
 
@@ -413,7 +413,7 @@ for branch in ${BRANCH_NAME//,/ }; do
             rm -rf ./* || true
           else
             cd "$source_dir"
-            (set +eu ; mka "${jobs_arg[@]}" clean) &>> "$DEBUG_LOG"
+            (set +eu ; mka "${jobs_arg[@]}" clean) |& tee -a "$DEBUG_LOG"
           fi
         fi
 
