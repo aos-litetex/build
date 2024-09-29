@@ -216,8 +216,8 @@ for branch in ${BRANCH_NAME//,/ }; do
     sed -i "/\$(filter .*\$(${vendor^^}_BUILDTYPE)/,/endif/d" "$makefile_containing_version"
 
     # Set a custom updater URI if a OTA URL is provided
-    echo ">> [$(date)] Adding OTA URL overlay (for custom URL $OTA_URL)"
     if [ -n "$OTA_URL" ]; then
+      echo ">> [$(date)] Adding OTA URL overlay (for custom URL $OTA_URL)"
       if [ -d "packages/apps/Updater/app/src/main/res/values" ]; then
         # "New" Updater project structure
         updater_values_dir="packages/apps/Updater/app/src/main/res/values"
