@@ -136,9 +136,9 @@ for branch in ${BRANCH_NAME//,/ }; do
 
     echo ">> [$(date)] (Re)initializing branch repository" | tee -a "$repo_log"
     if [ "$LOCAL_MIRROR" = true ]; then
-      ( yes||: ) | repo init -u ${ANDROID_MANIFEST_GIT_REPO_URL:-https://github.com/LineageOS/android.git} --reference "$MIRROR_DIR" -b "$branch" ${ADDITIONAL_REPO_INIT_ARGS:-} --git-lfs &>> "$repo_log"
+      ( yes||: ) | repo init -v -u ${ANDROID_MANIFEST_GIT_REPO_URL:-https://github.com/LineageOS/android.git} --reference "$MIRROR_DIR" -b "$branch" ${ADDITIONAL_REPO_INIT_ARGS:-} --git-lfs | tee -a "$repo_log"
     else
-      ( yes||: ) | repo init -u ${ANDROID_MANIFEST_GIT_REPO_URL:-https://github.com/LineageOS/android.git} -b "$branch" ${ADDITIONAL_REPO_INIT_ARGS:-} --git-lfs &>> "$repo_log"
+      ( yes||: ) | repo init -v -u ${ANDROID_MANIFEST_GIT_REPO_URL:-https://github.com/LineageOS/android.git} -b "$branch" ${ADDITIONAL_REPO_INIT_ARGS:-} --git-lfs | tee -a "$repo_log"
     fi
 
     # Copy local manifests to the appropriate folder in order take them into consideration
@@ -156,7 +156,7 @@ for branch in ${BRANCH_NAME//,/ }; do
     builddate=$(date +%Y%m%d)
     if [ "${NO_SYNC:-false}" = false ]; then
       echo ">> [$(date)] Syncing branch repository" | tee -a "$repo_log"
-      repo sync "${jobs_arg[@]}" -c --force-sync | tee -a "$repo_log"
+      repo sync "${jobs_arg[@]}" -v -c --force-sync | tee -a "$repo_log"
     fi
 
     if [ ! -d "vendor/$vendor" ]; then
