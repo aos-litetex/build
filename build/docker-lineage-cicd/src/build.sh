@@ -156,7 +156,7 @@ for branch in ${BRANCH_NAME//,/ }; do
     builddate=$(date +%Y%m%d)
     if [ "${NO_SYNC:-false}" = false ]; then
       echo ">> [$(date)] Syncing branch repository" | tee -a "$repo_log"
-      repo sync "${jobs_arg[@]}" -c --force-sync &>> "$repo_log"
+      repo sync "${jobs_arg[@]}" -c --force-sync | tee -a "$repo_log"
     fi
 
     if [ ! -d "vendor/$vendor" ]; then
