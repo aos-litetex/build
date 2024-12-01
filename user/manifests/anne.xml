@@ -35,6 +35,7 @@
 
   <!-- FMRadio Hisi support -->
   <project path="packages/apps/FMRadio-Hisi" name="aos-litetex/android_packages_apps_FMRadio-Hisi" remote="github" revision="main" />
+  <project path="hardware/hisi_fm" name="aos-litetex/android_hardware_hisi_fm" remote="github" />
 
   <!-- Patches -->
   <project path="lineage_patches_leaos" name="aos-litetex/lineage_patches_leaos" remote="github" />
