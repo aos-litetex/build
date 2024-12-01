@@ -33,6 +33,9 @@
   <!-- clang -->
   <project path="prebuilts/clang/host/linux-x86/clang-r416183b1" name="aos-litetex/android_prebuilts_clang_host_linux-x86_clang-r416183b1" remote="github" revision="main" />
 
+  <!-- FMRadio Hisi support -->
+  <project path="packages/apps/FMRadio-Hisi" name="aos-litetex/android_packages_apps_FMRadio-Hisi" remote="github" revision="main" />
+
   <!-- Patches -->
   <project path="lineage_patches_leaos" name="aos-litetex/lineage_patches_leaos" remote="github" />
 </manifest>
