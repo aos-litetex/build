@@ -312,8 +312,10 @@ for branch in ${BRANCH_NAME//,/ }; do
 
         DEBUG_LOG="$LOGS_DIR/$logsubdir/lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename.log"
 
+        # DO NOT USE |& tee ... AS IT CAUSES breakfast TO NOT WRITE THE CONFIG!
+        # https://stackoverflow.com/q/692000/11649486
         set +eu
-        breakfast "$codename" "$BUILD_TYPE" |& tee -a "$DEBUG_LOG"
+        breakfast "$codename" "$BUILD_TYPE" > >(tee -a "$DEBUG_LOG") 2> >(tee -a "$DEBUG_LOG" >&2)
         breakfast_returncode=$?
         set -eu
         if [ $breakfast_returncode -ne 0 ]; then
@@ -334,7 +336,7 @@ for branch in ${BRANCH_NAME//,/ }; do
         # Start the build
         echo ">> [$(date)] Starting build for $codename, $branch branch" | tee -a "$DEBUG_LOG"
         build_successful=false
-        if (set +eu ; mka "${jobs_arg[@]}" systemimage) |& tee -a "$DEBUG_LOG"; then
+        if (set +eu ; mka "${jobs_arg[@]}" systemimage) > >(tee -a "$DEBUG_LOG") 2> >(tee -a "$DEBUG_LOG" >&2); then
           # https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F after this
           outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
           echo ">> [$(date)] Moving build artifacts for $codename to '$outdir'" | tee -a "$DEBUG_LOG"
