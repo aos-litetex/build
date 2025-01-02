@@ -51,10 +51,6 @@ ENV OTA_URL=''
 ENV USER_NAME='LineageOS Buildbot'
 ENV USER_MAIL='lineageos-buildbot@docker.host'
 
-# Include proprietary files, downloaded automatically from github.com/TheMuppets/ and gitlab.com/the-muppets/
-# Only some branches are supported
-ENV INCLUDE_PROPRIETARY=true
-
 # Mount an overlay filesystem over the source dir to do each build on a clean source
 ENV BUILD_OVERLAY=false
 

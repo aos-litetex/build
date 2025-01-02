@@ -19,7 +19,6 @@ services:
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
-      - "INCLUDE_PROPRIETARY=false"
     volumes:
       - "lineage:/srv/src"
       - "./user/zips:/srv/zips"

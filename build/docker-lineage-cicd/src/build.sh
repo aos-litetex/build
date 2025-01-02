@@ -81,13 +81,6 @@ if [ "$LOCAL_MIRROR" = true ]; then
   mkdir -p .repo/local_manifests
   rsync -a --delete --include '*.xml' --exclude '*' "$LMANIFEST_DIR/" .repo/local_manifests/
 
-  rm -f .repo/local_manifests/proprietary.xml
-  if [ "$INCLUDE_PROPRIETARY" = true ]; then
-    wget -q -O .repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/mirror/default.xml"
-    /root/build_manifest.py --remote "https://gitlab.com" --remotename "gitlab_https" \
-      "https://gitlab.com/the-muppets/manifest/raw/mirror/default.xml" .repo/local_manifests/proprietary_gitlab.xml
-  fi
-
   echo ">> [$(date)] Syncing mirror repository" | tee -a "$repo_log"
   repo sync "${jobs_arg[@]}" --force-sync --no-clone-bundle &>> "$repo_log"
 fi
@@ -145,13 +138,6 @@ for branch in ${BRANCH_NAME//,/ }; do
     echo ">> [$(date)] Copying '$LMANIFEST_DIR/*.xml' to '.repo/local_manifests/'"
     mkdir -p .repo/local_manifests
     rsync -a --delete --include '*.xml' --exclude '*' "$LMANIFEST_DIR/" .repo/local_manifests/
-
-    rm -f .repo/local_manifests/proprietary.xml
-    if [ "$INCLUDE_PROPRIETARY" = true ]; then
-      wget -q -O .repo/local_manifests/proprietary.xml "https://raw.githubusercontent.com/TheMuppets/manifests/$themuppets_branch/muppets.xml"
-      /root/build_manifest.py --remote "https://gitlab.com" --remotename "gitlab_https" \
-        "https://gitlab.com/the-muppets/manifest/raw/$themuppets_branch/muppets.xml" .repo/local_manifests/proprietary_gitlab.xml
-    fi
 
     builddate=$(date +%Y%m%d)
     if [ "${NO_SYNC:-false}" = false ]; then

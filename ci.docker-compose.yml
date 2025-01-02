@@ -15,7 +15,6 @@ services:
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
-      - "INCLUDE_PROPRIETARY=false"
       - "CCACHE_SIZE=5G"
     volumes:
       - "lineage:/srv/src"
