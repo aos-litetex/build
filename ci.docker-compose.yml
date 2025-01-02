@@ -1,0 +1,32 @@
+services:
+  build:
+    container_name: build-lineage-os
+    build:
+      context: build/docker-lineage-cicd
+    environment:
+      - "BRANCH_NAME=lineage-20.0"
+      # 1. shallow clone
+      # 2. We don't care about other devices or other meta projects
+      - "ADDITIONAL_REPO_INIT_ARGS=--depth=1 -g default,-pixel-extra,-legacy-qcom,-infra"
+      # Use custom android manifest which excludes not needed projects
+      - "ANDROID_MANIFEST_GIT_REPO_URL=https://github.com/aos-litetex/android.git"
+      - "DEVICE_LIST=arm64_bvN"
+      - "CLEAN_AFTER_BUILD=false"
+      - "SIGN_BUILDS=true"
+      - "SIGNATURE_SPOOFING=restricted"
+      - "WITH_GMS=true"
+      - "INCLUDE_PROPRIETARY=false"
+      - "CCACHE_SIZE=5G"
+    volumes:
+      - "lineage:/srv/src"
+      - "./user/zips:/srv/zips"
+      - "./user/logs:/srv/logs"
+      - "./user/ccache:/srv/ccache"
+      - "./user/keys:/srv/keys"
+      - "./user/manifests:/srv/local_manifests"
+      - "./user/userscripts:/srv/userscripts"
+# Create as non Windows mounted volumes otherwise Docker/WSL dies because Windows can't handle some files e.g. aux
+volumes:
+  cache:
+  lineage:
+

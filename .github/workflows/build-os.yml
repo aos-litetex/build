@@ -16,10 +16,14 @@ jobs:
         token: ${{ secrets.SIGNING_KEY_CHECKOUT_GH_TOKEN }}
         path: user/keys
 
-    # TODO: Use CC-Cache
+    - name: Cache CCache
+      uses: actions/cache@v4
+      with:
+        path: user/ccache
+        key: ccache
     
     - name: Build OS using Docker
-      run: docker compose up
+      run: docker compose -f ci.docker-compose.yml up
 
     - name: Archive logs
       uses: actions/upload-artifact@v4
