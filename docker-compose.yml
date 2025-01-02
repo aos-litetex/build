@@ -15,6 +15,7 @@ services:
       # - "PARALLEL_JOBS=5"
       # - "NO_SYNC=true"
       - "CLEAN_OUT_DIR=true"
+      - "CLEAN_AFTER_BUILD=false"
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
