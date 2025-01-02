@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, type-ccx33, in-hel1, image-x86-app-docker-ce]
+    runs-on: [self-hosted, type-cpx51, in-hel1, image-x86-app-docker-ce]
     steps:
     - uses: actions/checkout@v4
 
@@ -15,6 +15,8 @@ jobs:
         repository: aos-litetex/build-signing-keys
         token: ${{ secrets.SIGNING_KEY_CHECKOUT_GH_TOKEN }}
         path: user/keys
+
+    # TODO: Use CC-Cache
     
     - name: Build OS using Docker
       run: docker compose up
@@ -27,10 +29,10 @@ jobs:
 
     - run: ls -lha user/zips
 
-    - name: Archive built artifacts
+    - name: Archive system image
       uses: actions/upload-artifact@v4
       with:
         name: zips
-        path: user/zips
+        path: user/zips/**/system.img
 
     # TODO: Apply customization from huawei-creator
