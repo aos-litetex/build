@@ -12,8 +12,3 @@ repopick -t 13-taro-kalama -r -f
 repopick 321337 -r -f # Deprioritize important developer notifications
 repopick 321338 -r -f # Allow disabling important developer notifications
 repopick 321339 -r -f # Allow disabling USB notifications
-
-# Was changed in https://github.com/LineageOS/android_vendor_lineage/commit/49b20fd75c747da08697e6db0be1e300b2fff6f6
-# Ported over from https://github.com/Iceows/lineage_build_leaos/commit/18c18ad4b7a5c821a1acb7eab11c06b72344eea0
-echo "Setting WITH_ADB_INSECURE"
-export WITH_ADB_INSECURE=true
