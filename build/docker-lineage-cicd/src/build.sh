@@ -310,12 +310,12 @@ for branch in ${BRANCH_NAME//,/ }; do
           logsubdir=
         fi
 
+        DEBUG_LOG="$LOGS_DIR/$logsubdir/lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename.log"
+
         if [ "$CLEAN_OUT_DIR" = true ]; then
           echo ">> [$(date)] Cleaning out dir for device $codename" | tee -a "$DEBUG_LOG"
           rm -rf out || true
         fi
-
-        DEBUG_LOG="$LOGS_DIR/$logsubdir/lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename.log"
 
         # DO NOT USE |& tee ... AS IT CAUSES breakfast TO NOT WRITE THE CONFIG!
         # https://stackoverflow.com/q/692000/11649486
