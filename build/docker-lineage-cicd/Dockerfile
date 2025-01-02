@@ -64,6 +64,9 @@ ENV LOCAL_MIRROR=false
 # If you want to preserve old ZIPs set this to 'false'
 ENV CLEAN_OUTDIR=false
 
+# Custom: Cleans the out dir in src
+ENV CLEAN_SRC_OUT_DIR=false
+
 # Change this cron rule to what fits best for you
 # Use 'now' to start the build immediately
 # For example, '0 10 * * *' means 'Every day at 10:00 UTC'

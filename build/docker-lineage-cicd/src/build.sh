@@ -312,7 +312,7 @@ for branch in ${BRANCH_NAME//,/ }; do
 
         DEBUG_LOG="$LOGS_DIR/$logsubdir/lineage-$los_ver-$builddate-$RELEASE_TYPE-$codename.log"
 
-        if [ "$CLEAN_OUT_DIR" = true ]; then
+        if [ "$CLEAN_SRC_OUT_DIR" = true ]; then
           echo ">> [$(date)] Cleaning out dir" | tee -a "$DEBUG_LOG"
           rm -rf out || true
         fi
