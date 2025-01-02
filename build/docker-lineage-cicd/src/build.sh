@@ -340,8 +340,9 @@ for branch in ${BRANCH_NAME//,/ }; do
           # https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F after this
           outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
           echo ">> [$(date)] Moving build artifacts for $codename to '$outdir'" | tee -a "$DEBUG_LOG"
-          cp -v out/target/product/tdgsi_arm64_ab/system.img "$outdir" | tee -a "$DEBUG_LOG"
-          cp -vr out/target/product/tdgsi_arm64_ab/system/. "$outdir"/system | tee -a "$DEBUG_LOG"
+          mkdir -p "$outdir/system"
+          cp -v out/target/product/tdgsi_arm64_ab/system.img "$outdir/" | tee -a "$DEBUG_LOG"
+          cp -vr out/target/product/tdgsi_arm64_ab/system/. "$outdir/system" | tee -a "$DEBUG_LOG"
 
           # Move produced ZIP files to the main OUT directory
           # echo ">> [$(date)] Moving build artifacts for $codename to '$ZIP_DIR/$zipsubdir'" | tee -a "$DEBUG_LOG"
