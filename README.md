@@ -36,7 +36,7 @@ based on the [original guide from XDA](https://xdaforums.com/t/rom-huawei-13-lea
 * Flash system: ``fastboot flash <system.img>``
   * Can be downloaded from the [releases](https://github.com/aos-litetex/build/releases)
   * The image is compressed with ``zstd``. You have to unpack it first!
-    * On Windows you can do this e.g. with this [7-Zip-zstd](https://github.com/mcmilk/7-Zip-zstd)
+    * On Windows you can do this e.g. with [7-Zip-zstd](https://github.com/mcmilk/7-Zip-zstd)
 * Boot into recovery/TWRP
   * Remove USB cable
   * Hold ``Vol Up`` + ``Power``
@@ -63,7 +63,7 @@ based on the [original guide from XDA](https://xdaforums.com/t/rom-huawei-13-lea
 * Flash system: ``fastboot flash <system.img>``
   * Can be downloaded from the [releases](https://github.com/aos-litetex/build/releases)
   * The image is compressed with ``zstd``. You have to unpack it first!
-    * On Windows you can do this e.g. with this [7-Zip-zstd](https://github.com/mcmilk/7-Zip-zstd)
+    * On Windows you can do this e.g. with [7-Zip-zstd](https://github.com/mcmilk/7-Zip-zstd)
 * Boot into recovery/TWRP
   * Remove USB cable
   * Hold ``Vol Up`` + ``Power``
