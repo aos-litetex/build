@@ -5,7 +5,7 @@ For my fork (codename "HydraX") of [LeaOS](https://github.com/Iceows/lineage_bui
 ## OS information & scope
 * Based on ``Android 13``→[``LineageOS 20``](https://lineageos.org/)→[``LeaOS``](https://xdaforums.com/t/rom-huawei-13-leaos-lineage-20-0-for-huawei-device-emui-9-1-version.4558665/)
 * Shipped with [microG](https://microg.org/) and [F-Droid](https://f-droid.org)
-* Some minor additional patches to improve usability (e.g. not contacting unreachable [captive-portal](https://en.wikipedia.org/wiki/Captive_portal) [servers located in China](https://github.com/aos-litetex/lineage_patches_leaos/commit/8b829f6299dc90607f4cdc1f0917a6028dea9728)) and the build process
+* Some minor additional patches to improve usability and the build process
 * The build aims to be 
   * Platform-independent (using Docker)
   * Automated so that security updates can be shipped more often
