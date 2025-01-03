@@ -16,6 +16,7 @@ jobs:
         token: ${{ secrets.SIGNING_KEY_CHECKOUT_GH_TOKEN }}
         path: user/keys
 
+    # TODO: Cache is not updated
     - name: Cache CCache
       uses: actions/cache@v4
       with:
@@ -38,6 +39,53 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: zips
-        path: user/zips/**/system.img
+        path: user/zips/system.img
+    
+    - name: Checkout image creator
+      uses: actions/checkout@v4
+      with:
+        repository: aos-litetex/huawei-creator
+        path: huawei-creator
+    
+    - name: Build huawei-creator
+      run: docker build -t huawei-creator huawei-creator
 
-    # TODO: Apply customization from huawei-creator
+    - name: Run huawei-creator
+      run: >-
+        docker run --rm 
+          -it 
+          -v $(pwd)/user/zips:/data/huawei-creator 
+          --privileged 
+          huawei-creator 
+          /data/huawei-creator/run-huawei-emui9-ab-a13.sh system.img "HydraX(LeaOS) 20" "ANE-LX1"
+
+    - name: Rename image and compress
+      working-directory: user/zips
+      run: |
+        mv s-vndklite.img system-ANE-LX1.img
+        sudo apt-get update && sudo apt-get install -y zstd
+        zstd -T0 system-ANE-LX1.img -o system-ANE-LX1.img.zst
+
+    - name: Get version
+      id: version
+      run: |
+        version=$(date -u '+%Y.%m.%d')
+        echo "release=$version" >> $GITHUB_OUTPUT
+        echo "releasenumber=${version//[!0-9]/}" >> $GITHUB_OUTPUT
+    
+    - name: Create Release
+      id: create-release
+      uses: shogo82148/actions-create-release@v1
+      with:
+        tag_name: v${{ steps.version.outputs.release }}
+        release_name: v${{ steps.version.outputs.release }}
+        commitish: dev
+        body: |
+          ## [Changelog](https://github.com/${{ github.repository }}/blob/dev/CHANGELOG.md#${{ steps.version.outputs.releasenumber }})
+          See [Changelog#v${{ steps.version.outputs.release }}](https://github.com/${{ github.repository }}/blob/dev/CHANGELOG.md#${{ steps.version.outputs.releasenumber }}) for more information.
+    
+    - name: Upload Assets
+      uses: shogo82148/actions-upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create-release.outputs.upload_url }}
+        asset_path: user/zips/system-ANE-LX1.img.zst

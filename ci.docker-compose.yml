@@ -16,6 +16,8 @@ services:
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
       - "CCACHE_SIZE=6G"
+      - "CREATE_ZIP_SUB_DIRS=false"
+      - "COPY_SYSTEM_FILES_TO_OUT=false"
     volumes:
       - "lineage:/srv/src"
       - "./user/zips:/srv/zips"

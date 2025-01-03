@@ -329,11 +329,17 @@ for branch in ${BRANCH_NAME//,/ }; do
         build_successful=false
         if (set +eu ; mka "${jobs_arg[@]}" systemimage) > >(tee -a "$DEBUG_LOG") 2> >(tee -a "$DEBUG_LOG" >&2); then
           # https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F after this
-          outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
+          if [ "${CREATE_ZIP_SUB_DIRS:-true}" = true ]; then
+            outdir="$ZIP_DIR/$zipsubdir/$(date --utc +%Y-%m-%d-%H-%M)"
+          else
+            outdir="$ZIP_DIR"
+          fi
           echo ">> [$(date)] Moving build artifacts for $codename to '$outdir'" | tee -a "$DEBUG_LOG"
           mkdir -p "$outdir/system"
           cp -v out/target/product/tdgsi_arm64_ab/system.img "$outdir/" | tee -a "$DEBUG_LOG"
-          cp -vr out/target/product/tdgsi_arm64_ab/system/. "$outdir/system" | tee -a "$DEBUG_LOG"
+          if [ "${COPY_SYSTEM_FILES_TO_OUT:-true}" = true ]; then
+            cp -vr out/target/product/tdgsi_arm64_ab/system/. "$outdir/system" | tee -a "$DEBUG_LOG"
+          fi
 
           # Move produced ZIP files to the main OUT directory
           # echo ">> [$(date)] Moving build artifacts for $codename to '$ZIP_DIR/$zipsubdir'" | tee -a "$DEBUG_LOG"
