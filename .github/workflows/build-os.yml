@@ -67,13 +67,8 @@ jobs:
       run: docker build -t huawei-creator huawei-creator
 
     - name: Run huawei-creator
-      run: >-
-        docker run --rm 
-          -it 
-          -v $(pwd)/user/zips:/data/huawei-creator 
-          --privileged 
-          huawei-creator 
-          /data/huawei-creator/run-huawei-emui9-ab-a13.sh system.img "HydraX(LeaOS) 20" "ANE-LX1"
+      run: |
+        docker run --rm -it -v $(pwd)/user/zips:/data/huawei-creator --privileged huawei-creator /data/huawei-creator/run-huawei-emui9-ab-a13.sh system.img "HydraX(LeaOS) 20" "ANE-LX1"
 
     - name: Rename image and compress
       working-directory: user/zips
