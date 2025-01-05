@@ -7,7 +7,7 @@ echo "Setting WITH_ADB_INSECURE"
 export WITH_ADB_INSECURE=true
 
 echo "Executing repopick"
-repopick -t 13-burnin -r -f
+# repopick -t 13-burnin -r -f # Burn In Protection is not needed since it's not active and the targeted phones don't have a OLED display
 repopick -t 13-taro-kalama -r -f
 repopick 321337 -r -f # Deprioritize important developer notifications
 repopick 321338 -r -f # Allow disabling important developer notifications
