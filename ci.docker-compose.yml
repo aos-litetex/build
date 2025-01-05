@@ -15,7 +15,7 @@ services:
       - "SIGN_BUILDS=true"
       - "SIGNATURE_SPOOFING=restricted"
       - "WITH_GMS=true"
-      - "CCACHE_SIZE=6G"
+      - "CCACHE_SIZE=5G"
       - "CREATE_ZIP_SUB_DIRS=false"
       - "COPY_SYSTEM_FILES_TO_OUT=false"
     volumes:
