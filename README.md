@@ -85,6 +85,15 @@ If the installation is not working / randomly crashing you can try the following
 * Reinstall it with above steps
 * Pick an older release
 
+#### Encountered/Known problems
+* There are multiple problems inside the media decoder firmware:
+  * Frequent exceptions (MediaCodecError) occur when playing/streaming videos (on average every 10 min)
+    * This also occurs on EMUI/Android 9 however not as often.
+  * Frame-drops sometimes occurs as the GPU seems to be overloaded (hardware-acceleration not working?)
+  * Interacting with full-screen videos causes white flashes
+* Notch is not properly recognized in landscape mode
+* Call recording doesn't seem to work at all
+
 </details>
 
 ## Notes for maintaining/building
